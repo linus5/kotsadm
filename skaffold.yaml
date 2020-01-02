@@ -22,11 +22,6 @@ build:
     useBuildkit: true
 
   artifacts:
-    - image: kotsadm-api
-      context: "./api"
-      docker:
-        dockerfile: ./Dockerfile.skaffold
-
     - image: kotsadm-web
       context: "./web"
       sync:
@@ -44,10 +39,15 @@ build:
       docker:
         dockerfile: ./Dockerfile.skaffold
 
-    - image: kotsadm-operator
-      context: "./operator"
+    - image: kotsadm-api-node
+      context: "./api"
       docker:
         dockerfile: ./Dockerfile.skaffold
+
+    - image: kotsadm-api
+      context: "./"
+      docker:
+        dockerfile: ./dev/Dockerfile
 
 deploy:
   kustomize:
